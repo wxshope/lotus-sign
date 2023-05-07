@@ -40,7 +40,7 @@ sudo apt install mesa-opencl-icd ocl-icd-opencl-dev gcc git bzr jq pkg-config cu
 ### Install Go
 
 ## Build and install Lotus
-Once all the dependencies are installed, you can build and install the Lotus suite (lotus-sing). 
+Once all the dependencies are installed, you can build and install the Lotus suite (lotus-sign). 
   
  : 1 Clone the repository:
 
