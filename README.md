@@ -10,6 +10,7 @@ export KEYS="01234567890123456789012345678901" 默认私钥
 自定义私钥
 openssl rand -hex 16
 5a5c9f7f6da302d2c82f23e34159434d
+
 export KEYS=5a5c9f7f6da302d2c82f23e34159434d
 
 使用公开 lotus api地址
