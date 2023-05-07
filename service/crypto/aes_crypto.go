@@ -10,10 +10,6 @@ import (
 	"io"
 )
 
-var (
-	key = []byte("5a5c9f7f6da302d2c82f23e34159434d")
-)
-
 func AesEncrypt(plainText []byte) (data []byte, err error) {
 	// check if key length is valid
 	if len(key) != 16 && len(key) != 24 && len(key) != 32 {

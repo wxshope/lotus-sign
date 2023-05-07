@@ -16,9 +16,6 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/wallet/key"
 	"github.com/filecoin-project/lotus/lib/sigs"
-	_ "github.com/filecoin-project/lotus/lib/sigs/bls" // enable bls signatures
-	_ "github.com/filecoin-project/lotus/lib/sigs/delegated"
-	_ "github.com/filecoin-project/lotus/lib/sigs/secp" // enable secp signatures
 )
 
 type LocalWallet struct {
@@ -36,7 +33,7 @@ func InitRepo(path string) error {
 		return err
 	} else {
 		if err = os.MkdirAll(kstorePath, 0700); err != nil {
-			return errors.New("目录存在")
+			return errors.New("directory exists")
 		}
 	}
 

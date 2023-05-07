@@ -34,7 +34,7 @@ func GasLimit(ctx context.Context, nodeAPI v0api.FullNode, params *types.Message
 		if err != nil {
 			return nil, err
 		}
-		params.GasLimit = int64(float64(gasLimit) * GasLimitOverestimation)
+		params.GasLimit = int64(float64(gasLimit) * 1.25)
 	}
 
 	if params.GasPremium == types.EmptyInt || types.BigCmp(params.GasPremium, types.NewInt(0)) == 0 {

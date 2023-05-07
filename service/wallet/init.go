@@ -5,8 +5,10 @@ import (
 )
 
 const (
-	KNamePrefix = "wallet-"
-	KDefault    = "default"
+	KNamePrefix  = "wallet-"
+	KDefault     = "default"
+	fsKeystore   = "keystore"
+	KTrashPrefix = "trash-"
 )
 
 var log = logging.Logger("wallet")

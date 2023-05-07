@@ -19,15 +19,6 @@ type fsLockedRepo struct {
 	path string
 }
 
-const (
-	fsKeystore = "keystore"
-)
-
-// FsRepo is struct for repo, use NewFS to create
-type FsRepo struct {
-	path string
-}
-
 // NewFS creates a repo instance based on a path on file system
 
 func (fsr *fsLockedRepo) stillValid() error {
@@ -114,8 +105,6 @@ func (fsr *fsLockedRepo) Get(name string) (types.KeyInfo, error) {
 
 	return res, nil
 }
-
-const KTrashPrefix = "trash-"
 
 // Put saves key info under given name
 func (fsr *fsLockedRepo) Put(name string, info types.KeyInfo) error {
