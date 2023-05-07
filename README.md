@@ -1,10 +1,6 @@
 # lotus-sign
 
-#
-```bash git 模块分支切换版本
- git submodule  add https://proxy.jeongen.com/https://github.com/filecoin-project/lotus.git  extern/lotus 
- git submodule  foreach git checkout v1.23.0
-```
+
 
 离线签名 转账 修改owner地址 矿工提现
 
