@@ -31,7 +31,7 @@ var ActorWithdrawCmd = &cli.Command{
 		},
 	},
 	Action: func(cctx *cli.Context) error {
-		walletnew, err := wallet.NewWallet(wallet.LotusRepo)
+		walletnew, err := wallet.NewWallet(WalletRepo)
 		if err != nil {
 			return err
 		}
