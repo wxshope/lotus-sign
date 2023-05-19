@@ -16,7 +16,6 @@ import (
 	"golang.org/x/xerrors"
 	"time"
 )
-
 var ActorWithdrawCmd = &cli.Command{
 	Name:      "withdraw",
 	Usage:     "withdraw available balance to beneficiary",
@@ -26,9 +25,13 @@ var ActorWithdrawCmd = &cli.Command{
 			Name:  "actor",
 			Usage: "矿工地址 miner actor",
 		},
+		&cli.StringFlag{
+			Name:  "from",
+			Usage: "矿工 owner钱包地址",
+		},
 	},
 	Action: func(cctx *cli.Context) error {
-		walletnew, err := wallet.NewWallet(WalletRepo)
+		walletnew, err := wallet.NewWallet(wallet.LotusRepo)
 		if err != nil {
 			return err
 		}
@@ -36,6 +39,14 @@ var ActorWithdrawCmd = &cli.Command{
 		if act := cctx.String("actor"); act != "" {
 			var err error
 			miner, err = address.NewFromString(act)
+			if err != nil {
+				return fmt.Errorf("parsing address %s: %w", act, err)
+			}
+		}
+		var newowner address.Address
+		if act := cctx.String("from"); act != "" {
+			var err error
+			newowner, err = address.NewFromString(act)
 			if err != nil {
 				return fmt.Errorf("parsing address %s: %w", act, err)
 			}
@@ -103,6 +114,11 @@ var ActorWithdrawCmd = &cli.Command{
 			return err
 		}
 
+		if newowner != owner {
+			fmt.Println("owner钱包地址正确")
+			err := xerrors.New("owner钱包地址正确")
+			return err
+		}
 		var msg = &types.Message{
 			To:         miner,
 			From:       owner,
@@ -146,8 +162,9 @@ var ActorWithdrawCmd = &cli.Command{
 		fmt.Println("message successfully!", sm.String())
 		// wait for it to get mined into a block
 		for {
-			msg, err := NodeAPI.StateReplay(ctx, types.TipSetKey{}, sm)
-			if err != nil {
+			msg, err1 := NodeAPI.StateReplay(ctx, types.TipSetKey{}, sm)
+			if err1 != nil {
+				//log.Error("获取消息失败：", err1)
 				time.Sleep(time.Second * 2)
 				continue
 			}
